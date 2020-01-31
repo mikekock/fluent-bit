@@ -86,6 +86,14 @@ static int tail_register_file(const char *target, struct flb_tail_config *ctx)
 }
 
 /*
+ * Check if character is a directory separator (either / or \)
+ */
+static int tail_is_dir_sep(char c)
+{
+    return (c == '\\' || c == '/');
+}
+
+/*
  * Perform patern match on the given path string. This function
  * supports patterns with "nested" wildcards like below.
  *
@@ -116,7 +124,7 @@ static int tail_scan_pattern(const char *path, struct flb_tail_config *ctx)
      *            0<-----|
      */
     p0 = star;
-    while (path <= p0 && *p0 != '\\') {
+    while (path <= p0 && !tail_is_dir_sep(*p0)) {
         p0--;
     }
 
@@ -125,7 +133,7 @@ static int tail_scan_pattern(const char *path, struct flb_tail_config *ctx)
      *                   |---->1
      */
     p1 = star;
-    while (*p1 && *p1 != '\\') {
+    while (*p1 && !tail_is_dir_sep(*p1)) {
         p1++;
     }
 
