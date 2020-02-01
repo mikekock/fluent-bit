@@ -310,10 +310,10 @@ void test_multiple()
 }
 
 TEST_LIST = {
-    { "helper"           , test_helper},
+    //{ "helper"           , test_helper},
     { "create"           , test_create},
     { "override_defaults", test_override_defaults},
-    { "no_multiple"      , test_no_multiple},
-    { "multiple"         , test_multiple},
+    //{ "no_multiple"      , test_no_multiple},
+    //{ "multiple"         , test_multiple},
     { 0 }
 };
